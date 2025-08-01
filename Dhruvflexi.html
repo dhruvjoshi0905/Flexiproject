@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS Variables for Colors --- */
+        
         :root {
             --header-bg: black;
             --menu-bg: red;
@@ -86,13 +86,11 @@
         .extra  { grid-area: extra; }
         .banner { grid-area: banner; }
         
-        /* =========================================== */
-        /* --- Tablet & Desktop Layout (768px and up) --- */
-        /* =========================================== */
+        
         @media (min-width: 768px) {
             .layout-container {
-                /* Define the grid structure based on your description */
-                grid-template-columns: 1fr 1fr; /* Two equal columns for the main content area */
+                
+                grid-template-columns: 1fr 1fr; 
                 grid-template-areas:
                     "header menu"
                     "hero   hero"
@@ -100,13 +98,11 @@
                     "main   extra"
                     "banner banner";
                 
-                /* Define column widths for the top row */
+               
                 grid-template-columns: 40% 60%;
             }
 
-            /* For the middle section, we need to override the main grid columns.
-               A nested grid or flexbox is a good approach. Here we use subgrid if available,
-               or redefine columns for the specific rows. Let's use a simpler redefinition. */
+            
             .layout-container {
                 grid-template-columns: 1fr 1fr; /* Fallback for general structure */
                 grid-template-rows: auto auto 1fr auto auto; /* Define rows for content */
@@ -119,8 +115,6 @@
                     "main   extra"
                     "banner banner";
 
-                /* Set the column sizes for the specific layout you want */
-                /* This is a bit tricky with one grid, so let's adjust the template */
                  grid-template-columns: repeat(12, 1fr); /* Use a 12-column grid for flexibility */
                  grid-template-areas:
                     "header header header header header menu menu menu menu menu menu menu"
@@ -135,7 +129,7 @@
 <body>
 
     <div class="layout-container">
-        <!-- The HTML order is semantic. Visual order is controlled by CSS grid-area. -->
+        
         <header class="content-block header">Header</header>
         <nav class="content-block menu">Menu</nav>
         <section class="content-block hero">Hero</section>
