@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Responsive Layout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Variables for Colors --- */
+        :root {
+            --header-bg: black;
+            --menu-bg: red;
+            --hero-bg: blue;
+            --main-bg: darkblue;
+            --banner-bg: yellow;
+            --extra-bg: green;
+            --image-bg: lightgreen;
+            --text-light: white;
+            --text-dark: black;
+        }
+
+        /* --- General Body and Reset Styles --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- Main Layout Container --- */
+        .layout-container {
+            display: grid;
+            gap: 10px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 10px;
+            /* Mobile-first: Define grid areas for all blocks */
+            grid-template-areas:
+                "header"
+                "menu"
+                "hero"
+                "main"
+                "image"
+                "extra"
+                "banner";
+        }
+
+        /* --- Styling for all Content Blocks --- */
+        .content-block {
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-height: 100px;
+            color: var(--text-light);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- Applying the Color Palette --- */
+        .header { background-color: var(--header-bg); }
+        .menu   { background-color: var(--menu-bg); }
+        .hero   { background-color: var(--hero-bg); }
+        .main   { background-color: var(--main-bg); }
+        .banner { background-color: var(--banner-bg); color: var(--text-dark); text-shadow: none; }
+        .extra  { background-color: var(--extra-bg); }
+        .image  { background-color: var(--image-bg); color: var(--text-dark); text-shadow: none; }
+
+        /* --- Assigning Blocks to Grid Areas --- */
+        .header { grid-area: header; }
+        .menu   { grid-area: menu; }
+        .hero   { grid-area: hero; }
+        .main   { grid-area: main; }
+        .image  { grid-area: image; }
+        .extra  { grid-area: extra; }
+        .banner { grid-area: banner; }
+        
+        /* =========================================== */
+        /* --- Tablet & Desktop Layout (768px and up) --- */
+        /* =========================================== */
+        @media (min-width: 768px) {
+            .layout-container {
+                /* Define the grid structure based on your description */
+                grid-template-columns: 1fr 1fr; /* Two equal columns for the main content area */
+                grid-template-areas:
+                    "header menu"
+                    "hero   hero"
+                    "main   image"
+                    "main   extra"
+                    "banner banner";
+                
+                /* Define column widths for the top row */
+                grid-template-columns: 40% 60%;
+            }
+
+            /* For the middle section, we need to override the main grid columns.
+               A nested grid or flexbox is a good approach. Here we use subgrid if available,
+               or redefine columns for the specific rows. Let's use a simpler redefinition. */
+            .layout-container {
+                grid-template-columns: 1fr 1fr; /* Fallback for general structure */
+                grid-template-rows: auto auto 1fr auto auto; /* Define rows for content */
+                
+                /* Redefine the grid for the entire container */
+                grid-template-areas:
+                    "header menu"
+                    "hero   hero"
+                    "main   image"
+                    "main   extra"
+                    "banner banner";
+
+                /* Set the column sizes for the specific layout you want */
+                /* This is a bit tricky with one grid, so let's adjust the template */
+                 grid-template-columns: repeat(12, 1fr); /* Use a 12-column grid for flexibility */
+                 grid-template-areas:
+                    "header header header header header menu menu menu menu menu menu menu"
+                    "hero   hero   hero   hero   hero   hero hero hero hero hero hero hero"
+                    "main   main   main   main   main   main image image image image image image"
+                    "main   main   main   main   main   main extra extra extra extra extra extra"
+                    "banner banner banner banner banner banner banner banner banner banner banner banner";
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout-container">
+        <!-- The HTML order is semantic. Visual order is controlled by CSS grid-area. -->
+        <header class="content-block header">Header</header>
+        <nav class="content-block menu">Menu</nav>
+        <section class="content-block hero">Hero</section>
+        <main class="content-block main">Main</main>
+        <section class="content-block image">Image</section>
+        <section class="content-block extra">Extra</section>
+        <section class="content-block banner">Banner</section>
+    </div>
+
+</body>
+</html>
